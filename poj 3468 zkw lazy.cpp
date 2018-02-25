@@ -69,13 +69,10 @@ ll query(int l, int r) {
 }
 // height of first [1, n) nodes, starting from 1
 int geth(int n) {
-    int h = 0;
-    for (int i=31; i>=0; --i)
+    for (int i=sizeof(int)*8-1; i>=0; --i)
         if (n>>i & 1) 
-            break;
-        else
-            ++h;
-    return sizeof(int)*8 - h;
+            return sizeof(int)*8 - h;
+    return sizeof(int)*8;
 }
 
 int main() {
