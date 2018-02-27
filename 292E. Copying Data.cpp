@@ -19,7 +19,7 @@ inline int rs(int i) { return i<<1 | 1; }
 int geth(int n) {
     for (int i=sizeof(int)*8-1; i>=0; --i)
         if (n>>i & 1) 
-            return sizeof(int)*8 - h;
+            return i;
     return sizeof(int)*8;
 }
 
