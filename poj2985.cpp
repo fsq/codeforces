@@ -55,7 +55,7 @@ void rotate(int y, bool right) {
     link(t[x].s[right], y, !right);
     link(y, x, right);
 
-    refresh(y), refresh(x);
+    // refresh(y), refresh(x);
 }
 
 void splay(int x) {
