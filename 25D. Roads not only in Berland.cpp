@@ -52,15 +52,40 @@ using VI  = vector<int>;
 using VLL = vector<LL>;
 using VVI = vector<VI>;
 
+VI fa;
+
+int find(int x) {
+    return fa[x]==x ? x : fa[x]=find(fa[x]);
+}
+
 int main() {
 
+    int n;
+    RD(n);
+    fa = VI(n+1, 0);
+    iota(ALL(fa), 0);
 
+    VVI rd;
+    REP(i, 1, n-1) {
+        int x, y;
+        RD(x, y);
+        int fx = find(x), fy = find(y);
+        if (fx==fy) 
+            rd.PB({x, y, 0, 0});
+        else 
+            fa[fx] = fy;
+        
+    }
 
-
-
-
-
-
+    VI rt;
+    REP_IF(i, 1, n, fa[i]==i) rt.PB(i);
+    FORI_IF(i, rt, i>0) {
+        rd[i-1][2] = rt[i];
+        rd[i-1][3] = rt[i-1];
+    }
+    printf("%d\n", SZ(rt)-1);
+    FOREACH(&r, rd)
+        printf("%d %d %d %d\n", r[0],r[1],r[2],r[3]);
 
 
 
