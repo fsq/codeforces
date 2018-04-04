@@ -15,6 +15,9 @@
 #include <stack>
 #include <numeric>
 #include <memory>
+#include <thread>
+#include <future>
+
 using namespace std;
 
 #define PB                  push_back
@@ -53,8 +56,27 @@ using VI  = vector<int>;
 using VLL = vector<LL>;
 using VVI = vector<VI>;
 
-int main() {
+unordered_set<char> st = {'A','H','I','M','O','T','U','V','W','X','Y'};
 
+bool f(const string& S, int s, int e) {
+    for (int i=s; i<=e; ++i) {
+        int j = SZ(S)-i-1;
+        if (!(S[i]==S[j] && st.find(S[i])!=st.end())) 
+            return false;
+    }
+    return true;
+}
+
+int main() {    
+    string s;
+    cin >> s;
+    bool valid = true;
+    // 0..n/2
+    future<bool> f1 = async(launch::async, f, cref(s), 0, SZ(s)/4);
+    future<bool> f2 = async(launch::async, f, cref(s), SZ(s)/4, SZ(s)/2);
+
+
+    if (f1.get() && f2.get()) printf("YES\n"); else printf("NO\n");
 
     return 0;
 }
