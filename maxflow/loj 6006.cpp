@@ -63,7 +63,8 @@ void push(int u, int v) {
 }
 
 void init() {
-    V[src].h = snk + 1;
+    // V[src].h = snk + 1;
+    V[src].h = 4; // 3 layers
     FOR(i, SZ(V[src].N)) _push(src, V[src].N[i], c[src][V[src].N[i]]);
 }
 

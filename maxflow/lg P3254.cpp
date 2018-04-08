@@ -104,7 +104,8 @@ void push(int u, int v) {
 }
 
 void init() {
-    V[src].h = snk + 1;
+    // V[src].h = snk + 1;
+    V[src].h = 4;
     FOREACH(x, V[src].N) _push(src, x, c[src][x]);
 }
 
