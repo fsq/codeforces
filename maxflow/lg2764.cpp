@@ -55,10 +55,6 @@ void push(int u, int v) {
         f[v][u] -= delta;
     else 
         f[u][v] += delta;
-    // if (c[u][v]>0)
-    //     f[u][v] += delta;
-    // else
-    //     f[v][u] -= delta;
     V[u].e -= delta;
     V[v].e += delta;
 }
