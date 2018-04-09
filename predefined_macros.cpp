@@ -15,8 +15,6 @@
 #include <stack>
 #include <numeric>
 #include <memory>
-#include <list>
-#include <climits>
 using namespace std;
 
 #define PB                  push_back
@@ -57,18 +55,6 @@ using VVI = vector<VI>;
 
 int main() {
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     return 0;
 }
