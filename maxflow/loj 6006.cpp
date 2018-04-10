@@ -63,14 +63,12 @@ void push(int u, int v) {
 }
 
 void init() {
-    // V[src].h = snk + 1;
-    V[src].h = 4; // 3 layers
+    V[src].h = snk + 1;
     FOR(i, SZ(V[src].N)) _push(src, V[src].N[i], c[src][V[src].N[i]]);
 }
 
 void relabel(int u) {
     int h = (snk+1)<<1;
-    // FOREACH(x, V[u].N)
     FOR(i, SZ(V[u].N))
         if (cf(u,V[u].N[i])>0) h = min(h, V[V[u].N[i]].h+1);
     V[u].h = h;
