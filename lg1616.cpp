@@ -55,9 +55,19 @@ using VI  = vector<int>;
 using VLL = vector<LL>;
 using VVI = vector<VI>;
 
+int w[10007], v[10007], f[100007];
+
 int main() {
+    int m, n;
+    RD(m, n);
 
+    REP(i, 1, n) RD(w[i], v[i]);
 
+    REP(j, 1, n)
+        REP(i, w[j], m)
+            f[i] = max(f[i], f[i-w[j]]+v[j]);
+
+    printf("%d\n", f[m]);
 
 
 
