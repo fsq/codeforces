@@ -93,6 +93,7 @@ bool dfs(int u) {
         if (d[M[v]]==d[u]+1 && dfs(M[v])) {
             M[u] = v;
             M[v] = u;
+            d[u] = INF;
             return true;
         }
     d[u] = INF;

@@ -87,13 +87,13 @@ bool bfs(int n) {
 
 bool dfs(int u) {
     if (!u) return true;
+    int dt = d[u];
+    d[u] = INF;
     FOREACH(v, e[u]) 
-        if (d[M[v]]==d[u]+1 && dfs(M[v])) {
-            M[u] = v;
-            M[v] = u;
+        if (d[M[v]]==dt+1 && dfs(M[v])) {
+            M[u] = v, M[v] = u;
             return true;
         }
-    d[u] = INF; 
     return false;
 }
 
