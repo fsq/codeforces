@@ -66,10 +66,9 @@ bool bfs() {
 
     // only consider all left nodes
     REP(i, 1, n)
-        if (!M[i]) { // add free U vertices to queue
-            d[i] = 0;
-            q.push(i);
-        } else 
+        if (!M[i])  // add free U vertices to queue
+            d[i] = 0, q.push(i);
+        else 
             d[i] = INF;
     d[0] = INF;
 
@@ -89,14 +88,13 @@ bool bfs() {
 
 bool dfs(int u) {
     if (!u) return true;
+    int du = d[u];
+    d[u] = INF;
     FOREACH(v, e[u])
-        if (d[M[v]]==d[u]+1 && dfs(M[v])) {
-            M[u] = v;
-            M[v] = u;
-            d[u] = INF;
+        if (d[M[v]]==du+1 && dfs(M[v])) {
+            M[u] = v, M[v] = u;
             return true;
         }
-    d[u] = INF;
     return false;
 }
 
