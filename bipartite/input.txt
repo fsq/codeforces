@@ -1,6 +1,7 @@
-5
-aaa
-aa
-a
-aaaa
-aaaaa
+6
+privet
+spasibo
+codeforces
+java
+marmelad
+normalno

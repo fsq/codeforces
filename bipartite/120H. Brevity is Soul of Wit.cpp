@@ -18,6 +18,7 @@
 #include <list>
 #include <climits>
 #include <fstream>
+#include <future>
 using namespace std;
 
 #define PB                  push_back
@@ -64,18 +65,24 @@ string M[MAXN];
 vector<string> e[MAXN];
 unordered_map<string, int> Mr;
 
-void proc(const int id, string& s, const string& a, int p) {
+void search(const int id, string& s, const string& a, int p) {
     if (p==a.size())
         if (s.size()>0 && s.size()<=4) e[id].PB(s); else {}
     else {
-        proc(id, s, a, p+1);
+        search(id, s, a, p+1);
 
         if (s.size()<4) {
             s.PB(a[p]);
-            proc(id, s, a, p+1);
+            search(id, s, a, p+1);
             s.pop_back();
         }
     }
+}
+
+void proc(const int id, string a) {
+    string t;
+    t.reserve(10);
+    search(id, t, a, 0);
 }
 
 bool bfs() {
@@ -116,6 +123,7 @@ bool dfs(int u) {
 int main() {
     ifstream in("input.txt");
     in >> n;
+    vector<future<void>> tasks; tasks.reserve(n);
     string s;
     REP(i, 1, n) {
         in >> s;
@@ -123,10 +131,10 @@ int main() {
             e[i].PB(s);
             continue;
         }
-        string t;
-        t.reserve(10);
-        proc(i, t, s, 0);
+        // tasks.PB(async(proc, i, s));
+        proc(i, s);
     }
+    // for_each(ALL(tasks), mem_fn(&future<void>::get));
     int ans = 0;
     while (bfs()) 
         REP(i, 1, n) 
