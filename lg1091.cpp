@@ -17,6 +17,7 @@
 #include <memory>
 #include <list>
 #include <climits>
+#include <fstream>
 using namespace std;
 
 #define PB                  push_back
@@ -56,6 +57,36 @@ using VLL = vector<LL>;
 using VVI = vector<VI>;
 
 int main() {
+
+    // ifstream fin("chorus.in");
+    int n;
+    cin >> n;
+    VI a(1);
+    REP(i, 1, n) {
+        int x; 
+        cin >> x;
+        a.PB(x);
+    }
+
+    VI f(n+1, 1), g(n+1, 1);
+
+    REP(i, 2, n)
+        REP(j, 1, i-1) 
+            if (a[i]>a[j]) f[i] = max(f[i], f[j]+1);
+
+    PER(i, n-1, 1)
+        PER(j, n, i+1)
+            if (a[i]>a[j]) g[i] = max(g[i], g[j]+1);
+
+    int ans = n;
+    REP(i, 1, n) ans = min(ans, n-(f[i]+g[i]-1));
+    
+
+    // ofstream fout("chorus.out");
+    cout << ans << endl;
+
+    // fin.close();
+    // fout.close();
 
 
     return 0;

@@ -56,6 +56,30 @@ using VLL = vector<LL>;
 using VVI = vector<VI>;
 
 int main() {
+    int n, k;
+
+    vector<PII> tasks;
+
+    RD(n, k);
+    REP(i, 1, k) {
+        PII p;
+        RD(p.first, p.second);
+        tasks.PB(p);
+    }
+
+    sort(ALL(tasks));
+
+    VI f(n+3, 0);
+    int j = SZ(tasks)-1;
+    PER(i, n, 1) 
+        if (j>=0 && tasks[j].F==i)
+            while (j>=0 && tasks[j].F==i) 
+                f[i] = max(f[i], f[i+tasks[j--].S]);
+        else 
+            f[i] = f[i+1] + 1;   
+    
+    printf("%d\n", f[1]);
+
 
 
     return 0;
