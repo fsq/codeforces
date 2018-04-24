@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "memory": "cpp",
+        "utility": "cpp",
+        "algorithm": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__string": "cpp",
+        "__tree": "cpp",
+        "string_view": "cpp"
+    }
+}
