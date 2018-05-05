@@ -8,14 +8,15 @@ using namespace std;
 
 
 int n;
-const float INF = 10000000000;
-using PFF = pair<float, float>;
+const double INF = 10000000000;
+using PFF = pair<double, double>;
 PFF a[203];
-float f[203][203];
-float far[203];
-float fa[203];
+double f[203][203];
+double far[203];
+double setfar[203];
+double fa[203];
 
-float dist(const PFF& a, const PFF& b) {
+double dist(const PFF& a, const PFF& b) {
     return sqrt((a.F-b.F)*(a.F-b.F) + (a.S-b.S)*(a.S-b.S));
 }
 
@@ -30,7 +31,7 @@ int main() {
     }
 
     for (int i=1; i<=n; ++i) {
-        scanf("%f %f\n", &a[i].first, &a[i].second);
+        scanf("%lf %lf\n", &a[i].first, &a[i].second);
         fa[i] = i;
     }
 
@@ -54,16 +55,20 @@ int main() {
                 if (i!=j)
                     f[i][j] = min(f[i][j], f[i][k]+f[k][j]);
 
-    for (int i=1; i<=n; ++i) 
+    for (int i=1; i<=n; ++i) {
         for (int j=1; j<=n; ++j)
             if (f[i][j]!=INF)
-                far[i] = max(far[i], f[i][j]);
-    // for (int i=1; i<=n; ++i) printf("%f\n", far[i]);
-    float ans = INF;
+                far[i] = max(far[i], f[i][j]),
+        setfar[find(i)] = max(setfar[find(i)], far[i]);        
+    }
+
+    double ans = INF;
     for (int i=1; i<=n; ++i)
         for (int j=1; j<=n; ++j)
             if (find(i)!=find(j))
-                ans = min(ans, far[i]+far[j]+dist(a[i], a[j]));
-    printf("%.6f\n", ans);
+                ans = min(ans, 
+                        max(far[i]+far[j]+dist(a[i], a[j]),
+                            max(setfar[find(i)],setfar[find(j)])));
+    printf("%.6lf\n", ans);
     return 0;
 }
