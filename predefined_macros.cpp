@@ -56,7 +56,7 @@ using VLL = vector<LL>;
 using VVI = vector<VI>;
 
 int main() {
-
+    
 
     return 0;
 }
