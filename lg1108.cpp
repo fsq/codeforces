@@ -10,7 +10,7 @@ int main() {
 
     int n;
     cin >> n;
-
+ 
     vector<vector<pair<int,int>>> a;
     int cnt = 0;
     for (int x,_i=0; _i<n; ++_i) {
