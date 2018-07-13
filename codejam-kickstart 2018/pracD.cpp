@@ -18,10 +18,24 @@ void init() {
 	}
 }
 
+inline ll g(int i, int j) { return ps[j] - ps[i-1]; }
+
+inline ll row_sum(int r, int c) {
+	for (int j=)
+}
 
 // count how many of n^2 <=x and sum of them
 pair<ll, ll> count(int x) {
-	
+	ll sum=0, cnt=0;
+	int i=n, j=n;
+	while (i)
+		if (g(i, j)>x)
+			--j;
+		else {
+			sum += row_sum(i, j);
+			--i;
+		}
+	return {cnt, sum};
 }
 
 ll find(ll i) {
