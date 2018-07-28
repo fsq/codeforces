@@ -8,7 +8,7 @@ using namespace std;
 int main() {
     string a;
     int m;
-    cin >> a >> m;
+    cin >> a >> m; 
 
     vector<vector<int>> trans(10);
     for (int x,y,i=0; i<m; ++i) {
