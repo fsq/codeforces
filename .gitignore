@@ -2,3 +2,4 @@ gen.cpp
 *.in
 *.out
 *.class
+.DS_Store
