@@ -18,7 +18,7 @@ int df(int n, int k) {
     f[n][k] = 0;
     for (int i=1; i+1<n; ++i)
         f[n][k] = (f[n][k] + df(i,k-1) * df(n-1-i,k-1)) % M;
-    printf("f[%d][%d]=%d\n", n,k,f[n][k]);
+
     return f[n][k];
 }
 
