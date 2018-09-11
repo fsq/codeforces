@@ -9,7 +9,7 @@ int main() {
     cin >> n >> k;
     int res = n % (2*k+1);
     vector<int> ans;
-    if (res==0) {
+    if (res==0) { 
         for (int i=k+1; i<=n; i+=2*k+1) ans.push_back(i);
     } else if (res>=k+1) {
         for (int i=res-k; i<=n; i+=2*k+1) ans.push_back(i);
