@@ -34,20 +34,25 @@
 #define FORI(i, container)  for (auto i=0; i<(container).size(); ++i)
 #define FORI_IF(i, container, assert) for (auto i=0; i<(container).size(); ++i) if (assert)
 #define ROFI(i, container)  for (auto i=SZ(container)-1; i>=0; --i)
-
 #define FOREACH(elem, container)  for (auto elem : (container))
+#define FOREACH_IF(elem, container, assert) for (auto elem : (container)) if (assert)
+
 #define MEMSET(container, value)  memset(container, value, sizeof(container))
+#define MEMSET0(container)        memset(container, 0, sizeof(container))
 #define FILL(container, value)    fill(container.begin(), container.end(), value)
-#define FILL0(container)          fill(container.begin(), container.end(), 0)
+#define FILL0(container)    fill(container.begin(), container.end(), 0)
 #define ALL(container)            (container).begin(), (container).end()
 #define SZ(container)             (int)((container).size())
 
 #define BACK(set_map)       *prev((set_map).end(), 1)
 #define FRONT(set_map)      *(set_map).begin()
 
+#define POP(var, container) auto var=(container.front()); container.pop();
+
 using PII = std::pair<int,int>;
 using LL  = long long;
 using VI  = std::vector<int>;
+using CVI = const VI;
 using VLL = std::vector<LL>;
 using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
