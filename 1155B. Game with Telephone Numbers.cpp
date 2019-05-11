@@ -34,9 +34,8 @@
 #define FORI(i, container)  for (auto i=0; i<(container).size(); ++i)
 #define FORI_IF(i, container, assert) for (auto i=0; i<(container).size(); ++i) if (assert)
 #define ROFI(i, container)  for (auto i=SZ(container)-1; i>=0; --i)
-#define FOREACH(elem, container)  for (auto elem : (container))
-#define FOREACH_IF(elem, container, assert) for (auto elem : (container)) if (assert)
 
+#define FOREACH(elem, container)  for (auto elem : (container))
 #define MEMSET(container, value)  memset(container, value, sizeof(container))
 #define MEMSET0(container)        memset(container, 0, sizeof(container))
 #define FILL(container, value)    fill(container.begin(), container.end(), value)
@@ -58,3 +57,29 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+
+int main() {
+  int n;
+  string s;
+  cin >> n >> s;
+
+  int cut = (n-11) / 2, n8 = 0, nx = 0, i;
+
+  for (i=0; i<n && n8<cut; ++i)
+    if (s[i]=='8')
+      ++n8;
+    else
+      ++nx;
+
+  bool boom = true;
+  if (n8==cut && nx<=cut) {
+    for (;i<n && nx<=cut; ++i)
+      if (s[i]=='8') {
+        boom = false;
+      } else 
+        ++nx;
+  } 
+  cout << (boom ? "NO" : "YES") << endl;
+  return 0;
+}

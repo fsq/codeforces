@@ -58,3 +58,49 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+
+struct E {
+	int w, t, id;
+};
+
+int main() {
+	ios::sync_with_stdio(false);
+	int n, m;
+	cin >> n >> m;
+	vector<E> es(m);
+	FOR(i, m) {
+		cin >> es[i].w >> es[i].t;
+		es[i].id = i;
+	}
+	stable_sort(ALL(es), [](const E& a, const E& b) {
+		return a.w < b.w || a.w==b.w && a.t==1;
+	});
+
+	vector<PII> ans(m);
+	int from=3, to=1, lk = 1;
+	bool ok = true;
+	for (auto& e : es) 
+		if (e.t) {
+			ans[e.id] = {lk, lk+1};
+			++lk;
+		} else {
+			if (to+1 >= from) {
+				++from;
+				to = 1;
+			}
+			if (from > lk) {
+				ok = false;
+				break;
+			}
+			ans[e.id] = {from, to++};
+		}
+
+ 	if (ok) 
+ 		FOREACH(&e, ans) 
+ 			cout << e.F << ' ' << e.S << '\n';
+ 	else
+ 		cout << -1 << endl;
+
+	return 0;
+}

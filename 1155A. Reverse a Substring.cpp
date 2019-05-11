@@ -34,9 +34,8 @@
 #define FORI(i, container)  for (auto i=0; i<(container).size(); ++i)
 #define FORI_IF(i, container, assert) for (auto i=0; i<(container).size(); ++i) if (assert)
 #define ROFI(i, container)  for (auto i=SZ(container)-1; i>=0; --i)
-#define FOREACH(elem, container)  for (auto elem : (container))
-#define FOREACH_IF(elem, container, assert) for (auto elem : (container)) if (assert)
 
+#define FOREACH(elem, container)  for (auto elem : (container))
 #define MEMSET(container, value)  memset(container, value, sizeof(container))
 #define MEMSET0(container)        memset(container, 0, sizeof(container))
 #define FILL(container, value)    fill(container.begin(), container.end(), value)
@@ -58,3 +57,19 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+
+int main() {
+  int n;
+  string s;
+  cin >> n >> s;
+
+  FOR(i, n-1) 
+    if (s[i+1] < s[i]) {
+      cout << "YES\n";
+      cout << i+1 << ' ' << i+2 << endl;
+      return 0;
+    }
+  cout << "NO\n";
+  return 0;
+}

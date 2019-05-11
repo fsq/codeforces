@@ -58,3 +58,29 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+
+int main() {
+  ios::sync_with_stdio(false);
+  int n;
+  cin >> n;
+  VI a(n), add(n+1);
+  FOR(i, n) cin >> a[i];
+  set<int> st;
+  
+  FOREACH(x, a) {
+    auto it = st.upper_bound(x);
+    if (it!=st.end() && next(it)==st.end()) 
+      ++add[*it];
+    else if (it==st.end())
+      --add[x];
+    st.insert(x);
+  }
+
+  int cand = 1;
+  REP(i, 2, n) 
+    if (add[i] > add[cand]) 
+      cand = i;
+  cout << cand << endl;
+  return 0;
+}

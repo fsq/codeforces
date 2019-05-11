@@ -58,3 +58,50 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+const int N = 1007;
+int f[N][N];
+vector<string> a;
+
+int main() {
+  int n, m, k, sx, sy, tx, ty;
+  cin >> n >> m >> k;
+
+  MEMSET0(f);
+  a.resize(n);
+  FOR(i, n) cin >> a[i];
+
+  cin >> sx >> sy >> tx >> ty;
+  --sx, --sy, --tx, --ty;
+  if (sx==tx && sy==ty) {
+    cout << 0 << endl;
+    return 0;
+  }
+
+  queue<PII> q;
+  q.push({sx, sy});
+  VI dx = {-1, 0, 1, 0};
+  VI dy = {0, 1, 0, -1};
+  for (int x,y; !q.empty(); ) {
+    tie(x, y) = q.front(); q.pop();
+    for (int dir=0; dir<4; ++dir) {
+      for (int nx,ny,l=1; l<=k; ++l) {
+        nx = x + l*dx[dir];
+        ny = y + l*dy[dir];
+        if (!(nx>=0 && nx<n && ny>=0 && ny<m && a[nx][ny] && 
+             (a[nx][ny]=='.' || a[nx][ny]=='x')))
+          break;
+        if (a[nx][ny]=='.') {
+          a[nx][ny] = 'x';
+          f[nx][ny] = f[x][y] + 1;
+          if (nx==tx && ny==ty) goto last;
+          q.push({nx, ny});
+        }
+      }
+    }
+  }
+  last:
+  cout << (f[tx][ty]==0 ? -1 : f[tx][ty]) << endl;
+
+  return 0;
+}

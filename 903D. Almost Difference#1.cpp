@@ -58,3 +58,28 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+
+int main() {
+  ios::sync_with_stdio(false);
+  
+  int n, x;
+  LL sum = 0;
+  long double ans = 0;
+  unordered_map<int, int> cnt;
+
+  cin >> n;
+  FOR(i, n) {
+    cin >> x;
+    LL ok = i - (cnt[x] + cnt[x-1] + cnt[x+1]);
+    LL minus = sum - ((LL)cnt[x]*x)
+                   - ((LL)cnt[x-1]*(x-1))
+                   - ((LL)cnt[x+1]*(x+1));
+    ans += ok*x - minus;
+    sum += x;
+    ++cnt[x];
+  }
+
+  cout.precision(0);
+  cout << fixed << ans << endl;
+}

@@ -58,3 +58,51 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+const int N = 1e5 + 7;
+int r[N];
+VI m[N];
+int fa[N], g[N];
+
+int find(int x) {
+  if (fa[x] == x) return x;
+  int f = find(fa[x]);
+  g[x] ^= g[fa[x]];
+  fa[x] = f;
+  return f;
+}
+
+int main() {
+  ios::sync_with_stdio(false);
+	int n, e;
+
+  cin >> n >> e;
+  REP(i, 1, n) 
+    cin >> r[i];
+  
+
+  for (int x,i=1; i<=e; ++i) {
+    fa[i] = i;
+    cin >> x;
+    for (int b,j=0; j<x; ++j) {
+      cin >> b;
+      m[b].PB(i);
+    }
+  }
+
+  REP(i, 1, n) {
+    int x = m[i][0], y = m[i][1];
+    int fx=find(x), fy=find(y);
+    if (fx != fy) {
+      fa[fx] = fy;
+      g[fx] = (!r[i]) ^ g[y] ^ g[x];
+    } else if (g[x] ^ g[y] ^ (!r[i])) {
+      cout << "NO\n";
+      return 0;
+    }
+  }
+
+  cout << "YES\n";
+
+	return 0;
+}

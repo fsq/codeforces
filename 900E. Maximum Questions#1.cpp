@@ -58,3 +58,43 @@ using VVI = std::vector<VI>;
 using VVLL = std::vector<VLL>;
 
 using namespace std;
+
+
+int main() {
+  int n, m;
+  string s;
+  cin >> n >> s;
+  cin >> m;
+  s = " " + s;
+
+  VI cq(n + 1);
+  VVI ca(n+1, VI(2)), cb = ca;
+  REP(i, 1, n) {
+    cq[i] = cq[i-1] + (s[i]=='?');
+    ca[i][i & 1] = ca[i-1][i & 1] + (s[i]=='a');
+    ca[i][!(i & 1)] = ca[i-1][!(i & 1)];
+    cb[i][i & 1] = cb[i-1][i & 1] + (s[i]=='b');
+    cb[i][!(i & 1)] = cb[i-1][!(i & 1)];
+  }
+
+  vector<PII> f(n+1);
+  REP(i, 1, n) {
+    f[i] = f[i-1];
+    if (i >= m) {
+      PII r = f[i-m];
+      int aodd = ca[i][!((i^m) & 1)] - ca[i-m][!((i^m) & 1)];
+      int aevn = ca[i][(i^m) & 1] - ca[i-m][(i^m) & 1];
+      int bodd = cb[i][!((i^m) & 1)] - cb[i-m][!((i^m) & 1)];
+      int bevn = cb[i][(i^m) & 1] - cb[i-m][(i^m) & 1];
+      if (!aevn && !bodd) {
+        ++r.first;
+        r.second += m - (aodd+bevn);
+        if (r.first>f[i].first || r.first==f[i].first && r.second<f[i].second)
+          f[i] = r;
+      }
+    }
+  }
+  cout << f.back().second << endl;
+
+  return 0;
+}
